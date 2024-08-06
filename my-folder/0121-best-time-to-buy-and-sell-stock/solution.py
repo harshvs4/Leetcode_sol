@@ -5,9 +5,12 @@ class Solution:
 
         for i in range(1, len(prices)):
             p = prices[i] - buy
+
             if buy > prices[i]:
                 buy = prices[i]
             else:
                 profit = max(p, profit)
-                
+
         return profit
+
+        
