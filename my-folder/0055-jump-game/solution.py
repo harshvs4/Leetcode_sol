@@ -6,6 +6,8 @@ class Solution:
                 return False
             elif n > gas:
                 gas = n
-            gas-=1
+            
+            gas -= 1
         return True
+            
         
