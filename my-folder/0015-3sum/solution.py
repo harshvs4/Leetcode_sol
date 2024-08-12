@@ -1,28 +1,36 @@
-class Solution:
-    def threeSum(self, nums: List[int]) -> List[List[int]]:
-        ans = []
-        nums.sort()
-        n = len(nums)
-        for i in range(n):
-            if i != 0 and nums[i] == nums[i-1]:
-                continue
-            j = i+1
-            k = n-1
+from typing import List
 
-            while j < k:
-                total = nums[i] + nums[j] + nums[k]
-                if total < 0:
-                    j += 1
-                elif total > 0:
-                    k -= 1
-                else:
-                    ans.append([nums[i],nums[j],nums[k]])
-                    j += 1
-                    k -= 1
-                    while j < k and nums[j] == nums[j-1]:
-                        j += 1
-                    while j < k and nums[k] == nums[k+1]:
-                        k -= 1
-                
-        return ans
-                
+class Solution:
+    def twoSum(self, nums: List[int], target: int, start: int) -> List[List[int]]:
+        # Two-pointer technique to find two numbers that sum to the target
+        results = []
+        dict1 = {}
+
+        for i in range(start, len(nums)):
+            comp = target - nums[i]
+            if comp in dict1:
+                results.append([comp, nums[i]])
+            dict1[nums[i]] = i
+        
+        return results
+
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()  # Sort the array to use the two-pointer technique
+        res = []
+        n = len(nums)
+
+        for i in range(n):
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue  # Skip duplicates
+
+            target = -nums[i]
+            two_sum_results = self.twoSum(nums, target, i + 1)
+
+            for pair in two_sum_results:
+                triplet = [nums[i]] + pair
+                res.append(triplet)
+
+        # To remove potential duplicates:
+        return list(set(map(tuple, res)))
+
+
