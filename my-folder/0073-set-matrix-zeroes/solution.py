@@ -3,38 +3,39 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        rows = len(matrix)
-        cols = len(matrix[0])
+        m = len(matrix)
+        n = len(matrix[0])
 
-        # Step 1: Identify rows and columns that need to be zeroed.
-        first_row_has_zero = any(matrix[0][j] == 0 for j in range(cols))
-        first_col_has_zero = any(matrix[i][0] == 0 for i in range(rows))
+        first_row_has_zero = any(matrix[0][j] == 0 for j in range(n))
+        first_col_has_zero = any(matrix[i][0] == 0 for i in range(m))
 
-        # Use the first row and first column to mark zero rows and columns.
-        for i in range(1, rows):
-            for j in range(1, cols):
+        
+
+        for i in range(1,m):
+            for j in range(1,n):
                 if matrix[i][j] == 0:
                     matrix[i][0] = 0
                     matrix[0][j] = 0
 
-        # Step 2: Zero out cells based on marks in the first row and first column.
-        for i in range(1, rows):
+        
+        for i in range(1, m):
             if matrix[i][0] == 0:
-                for j in range(1, cols):
+                for j in range(1, n):
                     matrix[i][j] = 0
 
-        for j in range(1, cols):
+        for j in range(1, n):
             if matrix[0][j] == 0:
-                for i in range(1, rows):
+                for i in range(1, m):
                     matrix[i][j] = 0
 
-        # Step 3: Zero out the first row if necessary.
+
         if first_row_has_zero:
-            for j in range(cols):
+            for j in range(n):
                 matrix[0][j] = 0
 
-        # Step 4: Zero out the first column if necessary.
         if first_col_has_zero:
-            for i in range(rows):
+            for i in range(m):
                 matrix[i][0] = 0
 
+
+        return matrix
