@@ -3,12 +3,14 @@ class Solution:
         s = s.strip()
         s = s.split()
         i = 0
-        n = len(s)-1
-
-        while i <= n:
-            s[i], s[n] = s[n], s[i]
+        j = len(s)-1
+        while i <= j:
+            s[i], s[j] = s[j], s[i]
             i+=1
-            n-=1
+            j-=1
+
+        return " ".join(s)
+
+
         
-        return ' '.join(s)
         
